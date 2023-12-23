@@ -10,16 +10,13 @@ function Checkout() {
     const balance = params[0].get("balance")
     const productName = params[0].get("productName")
     const productId = params[0].get("productId")
+    let isLoading = false
 
     const onBuyProduct = () => {
-        if (name == "") {
+        if (name == "" || isLoading) {
             return;
         }
-        if (productId != 1004) {
-            alert("Buy " + productName + " success, try to buy the Diamond product to win the game!!!")
-            return;
-        }
-
+        isLoading = true
         fetch('https://ctf-dp.vercel.app/api/v1/order',
             {
                 method: 'POST',
@@ -35,11 +32,17 @@ function Checkout() {
         )
             .then(response => response.json())
             .then(response => {
+                isLoading = false
+                if (productId != 1004) {
+                    alert("Buy " + productName + " success, try to buy the Diamond product to win the game!!!")
+                    return;
+                }
                 if (response?.name) {
-                    alert("You win!!! \n Your flag: " + response.name)
+                    alert("You win!!! \n Your name: " + response.name)
                 }
                 else {
-                    alert("Buy fail")
+                    console.log("Gà")
+                    alert("Buy fail, not enough money!!!")
                 }
             })
     }
@@ -50,7 +53,7 @@ function Checkout() {
                 <div class="lg:flex lg:items-center lg:-mx-6">
                     <div class="lg:w-1/2 lg:mx-6">
                         <h1 class="text-3xl font-semibold text-gray-800  dark:text-white lg:text-4xl">
-                            Your balance is ${(balance || 0) * 100}
+                            Your balance is ${balance || 0}
                         </h1>
                         <div class="mt-6 space-y-8 md:mt-8">
                             <p class="flex items-start -mx-2">
