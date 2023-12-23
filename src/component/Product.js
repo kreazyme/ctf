@@ -7,10 +7,10 @@ function Product() {
     const [data, setData] = useState([])
     const params = useSearchParams();
 
-    const balance = params[0].get("page") || 100
+    const balance = params[0].get("page") || 60
 
     const getData = () => {
-        fetch('http://35.198.241.252/api/v1/product')
+        fetch('https://ctf-dp.vercel.app/api/v1/product')
             .then(response => response.json())
             .then(response => {
                 setData(response)
@@ -24,6 +24,9 @@ function Product() {
     return (
         <div class="py-20 bg-gray-50">
             <div class="container mx-auto px-6 md:px-12 xl:px-32">
+                <div class="mb-16 text-center">
+                    <h2 class="mb-4 text-center text-2xl text-gray-900 font-bold md:text-4xl">{`Your balance: $${(balance || 0) * 100}`}</h2>
+                </div>
                 <div class="mb-16 text-center">
                     <h2 class="mb-4 text-center text-2xl text-gray-900 font-bold md:text-4xl">List all products</h2>
                 </div>
@@ -41,7 +44,7 @@ function Product() {
                                             <a href="#" class="text-gray-900 font-bold">{item.name}</a>
                                         </h4>
                                         <span class="block text-sm text-gray-500">{`Price: ${item.price} $`}</span>
-                                        <NavLink to={`/checkout?productId=${item.id}&productName=${item.name}&balance=${60}`}>
+                                        <NavLink to={`/checkout?productId=${item.id}&productName=${item.name}&balance=${balance}`}>
                                             <a href='#'>
                                                 <h4
                                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">

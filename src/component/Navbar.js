@@ -12,13 +12,11 @@ function Navbar() {
                 </a>
             </NavLink>
             <ul class="md:px-2 ml-auto md:flex md:space-x-2 absolute md:relative top-full left-0 right-0">
-                <NavLink to={"http://35.198.241.252/api/v1/order"}>
-                    <li>
-                        <a href="http://35.198.241.252/api/v1/order" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">
-                            <span>Ranking</span>
-                        </a>
-                    </li>
-                </NavLink>
+                <li>
+                    <a href="https://ctf-dp.vercel.app/api/v1/order" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">
+                        <span>Ranking</span>
+                    </a>
+                </li>
                 <NavLink to={"/product"}>
                     <li>
                         <a href="#" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">

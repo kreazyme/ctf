@@ -15,8 +15,12 @@ function Checkout() {
         if (name == "") {
             return;
         }
+        if (productId != 1004) {
+            alert("Buy " + productName + " success, try to buy the Diamond product to win the game!!!")
+            return;
+        }
 
-        fetch('http://35.198.241.252/api/v1/order',
+        fetch('https://ctf-dp.vercel.app/api/v1/order',
             {
                 method: 'POST',
                 headers: {
@@ -32,12 +36,11 @@ function Checkout() {
             .then(response => response.json())
             .then(response => {
                 if (response?.name) {
-                    alert("Buy success")
+                    alert("You win!!! \n Your flag: " + response.name)
                 }
                 else {
                     alert("Buy fail")
                 }
-                console.log(response)
             })
     }
 
